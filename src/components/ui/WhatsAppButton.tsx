@@ -2,7 +2,7 @@
 import Image from "next/image";
 
 export function WhatsAppButton() {
-  const phoneNumber = "91XXXXXXXXXX"; // Replace with your WhatsApp number
+  const phoneNumber = "919657133557"; // Replace with your WhatsApp number
 
   const message = encodeURIComponent(
     "Hello Rusham Investment, I would like to know more about your financial services."
