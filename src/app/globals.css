@@ -1,0 +1,269 @@
+@import "tailwindcss";
+
+:root {
+  --navbar-height: 104px;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --navbar-height: 88px;
+  }
+}
+
+/*
+ * Colours are NOT defined here. They come from src/config/theme.ts, which
+ * <ThemeStyle /> turns into `--theme-*` variables on :root. The tokens below
+ * simply expose those variables as `--color-*` custom properties and as
+ * Tailwind utilities (bg-background, text-foreground, bg-accent, …).
+ */
+@theme static {
+  --color-forest: var(--theme-forest);
+  --color-amber: var(--theme-amber);
+  --color-lavender: var(--theme-lavender);
+  --color-mint: var(--theme-mint);
+  --color-sage: var(--theme-sage);
+
+  --color-background: var(--theme-background);
+  --color-foreground: var(--theme-foreground);
+  --color-primary: var(--theme-primary);
+  --color-secondary: var(--theme-secondary);
+  --color-accent: var(--theme-accent);
+  --color-highlight: var(--theme-highlight);
+  --color-muted: var(--theme-muted);
+  --color-border: var(--theme-border);
+  --color-soft: var(--theme-soft-text);
+  --color-dark: var(--theme-dark-background);
+  --color-dark-foreground: var(--theme-dark-foreground);
+  --color-dark-surface: var(--theme-dark-surface);
+  --color-dark-border: var(--theme-dark-border);
+  --color-sage-bg: var(--theme-sage-background);
+}
+
+/* Pinned cinematic mode: desktop widths with motion allowed. Otherwise a calm stacked layout. */
+@custom-variant cinematic (@media (min-width: 1024px) and (prefers-reduced-motion: no-preference));
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility rise {
+  animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@theme inline {
+  --font-heading: var(--font-dm-serif), "Times New Roman", serif;
+  --font-sub: var(--font-manrope), system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+/* ------------------------------------------------------------------ base */
+@layer base {
+  html {
+    background: var(--color-background);
+    -webkit-text-size-adjust: 100%;
+    scrollbar-gutter: stable;
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    font-weight: 400;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+  }
+
+  h4,
+  h5 {
+    font-family: var(--font-sub);
+    font-weight: 700;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: var(--color-highlight);
+    color: var(--color-forest);
+  }
+
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  [id] {
+    scroll-margin-top: calc(var(--navbar-height) + 36px);
+  }
+}
+
+/* ------------------------------------------------------------ components */
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: var(--layout-content);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .container-wide {
+    width: 100%;
+    max-width: var(--layout-max);
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2rem);
+  }
+
+  .section-y {
+    padding-block: clamp(4.5rem, 9vw, 8.5rem);
+  }
+
+  .display-xl {
+    font-family: var(--font-heading);
+    font-size: clamp(2.75rem, 5.6vw + 0.6rem, 5.75rem);
+    line-height: 1.02;
+  }
+
+  .display-lg {
+    font-family: var(--font-heading);
+    font-size: clamp(2.25rem, 3.6vw + 0.7rem, 4.25rem);
+    line-height: 1.06;
+  }
+
+  .display-md {
+    font-family: var(--font-heading);
+    font-size: clamp(1.85rem, 2.2vw + 0.9rem, 3rem);
+    line-height: 1.1;
+  }
+
+  .heading-sub {
+    font-family: var(--font-sub);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow {
+    font-family: var(--font-sub);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+
+  .lead {
+    font-size: clamp(1.05rem, 0.35vw + 1rem, 1.25rem);
+    line-height: 1.65;
+  }
+
+  .label-sub {
+    font-family: var(--font-sub);
+    font-weight: 600;
+  }
+
+  .hairline {
+    border-color: var(--color-border);
+  }
+
+  .form-field {
+    width: 100%;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 0.95rem 1rem;
+    font-size: 1rem;
+    color: var(--color-foreground);
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .form-field::placeholder {
+    color: var(--color-sage);
+  }
+
+  .form-field:hover {
+    border-color: var(--color-sage);
+  }
+
+  .form-field:focus {
+    outline: none;
+    border-color: var(--color-foreground);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-foreground) 14%, transparent);
+  }
+
+  .form-field[aria-invalid="true"] {
+    border-color: #b3261e;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.page-enter {
+  animation: page-in 0.4s ease-out both;
+}
+
+/* Scroll-reveal initial state (revealed by GSAP; always visible without JS / reduced motion) */
+[data-reveal] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Lenis recommended base styles */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
