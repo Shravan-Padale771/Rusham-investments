@@ -54,7 +54,7 @@ export function Hero() {
           >
             <Button href="/contact">Start Your Journey</Button>
 
-            <Button href="#approach" variant="secondary" arrow={false}>
+            <Button href="/about" variant="secondary" arrow={false}>
               Explore Our Approach
             </Button>
           </div>
