@@ -21,7 +21,7 @@ export function AboutHero() {
           <div aria-hidden="true" className="absolute -left-4 top-10 h-full w-full rounded-[2rem] bg-sage-bg sm:-left-6" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem] bg-muted">
             <Image
-              src="/images/about-hero.jpg"
+              src="/images/rahul.png"
               alt="An advisory desk with a notebook, pen, calculator and a small plant in soft natural light"
               fill
               priority

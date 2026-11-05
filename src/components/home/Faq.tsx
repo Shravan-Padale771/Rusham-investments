@@ -31,7 +31,7 @@ export function Faq() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="section-y bg-background" aria-labelledby="faq-title">
+    <section className="section-y bg-muted" aria-labelledby="faq-title">
       <div className="container-x grid gap-12 lg:grid-cols-12 lg:gap-16">
         <div className="lg:col-span-4">
           <p className="eyebrow flex items-center gap-3 text-soft">

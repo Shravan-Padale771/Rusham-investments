@@ -28,7 +28,7 @@ export function AboutPreview() {
         <div className="lg:col-span-5">
           <div className="relative">
             <ImageReveal
-              src="/images/about-story.jpg"
+              src="/images/rahul.png"
               alt="A calm, light-filled private office with a wooden desk and a single plant"
               fill
               sizes="(min-width: 1024px) 40vw, 90vw"

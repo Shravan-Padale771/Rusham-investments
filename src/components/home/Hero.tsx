@@ -15,7 +15,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden bg-background"
+      className="relative overflow-hidden my-20 bg-background"
       aria-labelledby="hero-title"
     >
       <div className="container-wide grid items-center gap-10 md:grid-cols-[1.2fr_1fr] lg:gap-12">

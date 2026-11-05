@@ -1,3 +1,4 @@
+
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
@@ -8,6 +9,7 @@ import { ThemeStyle } from "@/components/layout/ThemeStyle";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -25,7 +27,14 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — Thoughtful Financial Guidance`,
     description: site.description,
-    images: [{ url: "/images/about-hero.jpg", width: 1024, height: 1024, alt: site.name }],
+    images: [
+      {
+        url: "/images/about-hero.jpg",
+        width: 1024,
+        height: 1024,
+        alt: site.name,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -53,15 +62,25 @@ const organizationSchema = {
   sameAs: Object.values(site.social).filter(Boolean),
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   return (
-    <html lang="en" className={`${headingFont.variable} ${subFont.variable} ${bodyFont.variable}`}>
+    <html
+      lang="en"
+      className={`${headingFont.variable} ${subFont.variable} ${bodyFont.variable}`}
+    >
       <head>
         <ThemeStyle />
         <noscript>
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+          <style>
+            {`[data-reveal]{opacity:1!important;transform:none!important}`}
+          </style>
         </noscript>
       </head>
+
       <body>
         <a
           href="#main"
@@ -69,13 +88,22 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
+
         <SmoothScroll />
         <Navbar />
+
         <main id="main">{children}</main>
+
         <Footer />
+
+        {/* Global Floating WhatsApp Button */}
+        <WhatsAppButton />
+
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
         />
       </body>
     </html>

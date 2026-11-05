@@ -1,3 +1,4 @@
+
 export function CoinsVideo({
   className = "",
   loading = "eager",

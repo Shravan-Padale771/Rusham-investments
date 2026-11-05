@@ -4,7 +4,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function WorkTogether() {
   return (
-    <section className="section-y bg-sage-bg text-dark" aria-labelledby="work-together-title">
+    <section className="section-y bg-background text-dark" aria-labelledby="work-together-title">
       <div className="container-x">
         <ScrollReveal className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">

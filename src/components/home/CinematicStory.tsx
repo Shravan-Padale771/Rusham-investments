@@ -80,7 +80,7 @@ export function CinematicStory() {
     };
   }, []);
 
-  // GSAP cinematic animation.
+  // Desktop cinematic animation.
   useLayoutEffect(() => {
     if (!cinematic || !root.current) return;
 
@@ -91,10 +91,9 @@ export function CinematicStory() {
 
       const track = q(".story-track")[0] as HTMLElement;
       const frame = q(".video-frame")[0] as HTMLElement;
-      const video = q(".story-video")[0] as HTMLVideoElement;
       const intro = q(".story-intro")[0] as HTMLElement;
 
-      if (!track || !frame || !video || !intro) return;
+      if (!track || !frame || !intro) return;
 
       const getDistance = () =>
         Math.max(0, track.scrollWidth - window.innerWidth);
@@ -111,31 +110,22 @@ export function CinematicStory() {
               Math.max(window.innerHeight * 2, getDistance() * 1.15)
             )}`,
           pin: true,
-          scrub: 0.4,
+          scrub: true,
           anticipatePin: 1,
           invalidateOnRefresh: true,
         },
       });
 
-      // Phase 1: Expand video frame using GPU-friendly transforms.
+      // Phase 1: Expand the video frame.
+      // The video itself is not animated or scaled.
       timeline.to(
         frame,
         {
-          scaleX: () => 1 / 0.44,
-          scaleY: () => 1 / 0.56,
+          scaleX: () => window.innerWidth / frame.offsetWidth,
+          scaleY: () => window.innerHeight / frame.offsetHeight,
           duration: 1,
           ease: "power2.inOut",
-        },
-        0
-      );
-
-      // Cinematic video zoom.
-      timeline.to(
-        video,
-        {
-          scale: 1.12,
-          duration: 1,
-          ease: "power2.inOut",
+          force3D: true,
         },
         0
       );
@@ -177,10 +167,12 @@ export function CinematicStory() {
           x: () => -getDistance(),
           duration: 4.5,
           ease: "none",
+          force3D: true,
         },
         1.2
       );
 
+      // Refresh after the initial layout.
       requestAnimationFrame(() => {
         ScrollTrigger.refresh();
       });
@@ -205,9 +197,7 @@ export function CinematicStory() {
             : "relative overflow-hidden bg-[#EFF9F0]"
         }
       >
-        {/* =========================================
-            VIDEO SECTION
-        ========================================= */}
+        {/* VIDEO SECTION */}
 
         <div
           className={
@@ -217,20 +207,12 @@ export function CinematicStory() {
           }
         >
           <div
-            className="video-frame relative mx-auto overflow-hidden bg-[#181F1C]"
-            style={
-              cinematic
-                ? {
-                    width: "44vw",
-                    height: "56vh",
-                    transformOrigin: "center center",
-                  }
-                : {
-                    width: "100%",
-                    maxWidth: "1200px",
-                    aspectRatio: "16 / 9",
-                  }
-            }
+            className="video-frame relative mx-auto overflow-hidden bg-[#181F1C] [backface-visibility:hidden] [will-change:transform]"
+            style={{
+              width: "44vw",
+              height: "56vh",
+              transformOrigin: "center center",
+            }}
           >
             <CoinsVideo
               loading="eager"
@@ -244,9 +226,7 @@ export function CinematicStory() {
           </div>
         </div>
 
-        {/* =========================================
-            CENTERED INTRODUCTION
-        ========================================= */}
+        {/* CENTERED INTRODUCTION */}
 
         <div
           className={
@@ -264,9 +244,7 @@ export function CinematicStory() {
           </h2>
         </div>
 
-        {/* =========================================
-            STORY PANELS
-        ========================================= */}
+        {/* STORY PANELS */}
 
         <div
           className={
