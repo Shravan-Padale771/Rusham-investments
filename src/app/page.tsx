@@ -8,16 +8,27 @@ import { ServicesPreview } from "@/components/home/ServicesPreview";
 import { WorkTogether } from "@/components/home/WorkTogether";
 import { Faq } from "@/components/home/Faq";
 
-
 export const metadata: Metadata = {
   ...pageMetadata({
-    title: "Rusham Investment — Thoughtful Financial Guidance & Wealth Planning",
+    title: "Rusham Investment | Financial Planning & Wealth Management",
+
     description:
-      "Thoughtful financial planning and disciplined investment guidance to help you build, protect and grow your wealth with confidence.",
+      "Rusham Investment offers financial planning, mutual fund investments, SIP planning, wealth management, tax planning and insurance solutions to help you build and protect your wealth.",
+
     path: "/",
+
+    keywords: [
+      "Rusham Investment",
+      "Rusham Investment Pune",
+      "Rusham Investment financial services",
+      "Rusham Investment mutual funds",
+      "Rusham Investment financial planning",
+      "Rusham Investment wealth management",
+    ],
   }),
+
   title: {
-    absolute: "Rusham Investment — Thoughtful Financial Guidance & Wealth Planning",
+    absolute: "Rusham Investment | Financial Planning & Wealth Management",
   },
 };
 
@@ -30,7 +41,6 @@ export default function HomePage() {
       <ServicesPreview />
       <WorkTogether />
       <Faq />
-
     </>
   );
 }
