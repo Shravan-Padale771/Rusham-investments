@@ -2,14 +2,16 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/config/site";
 
+const lastModified = new Date();
+
 const routes: Array<{
   path: string;
   priority: number;
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
 }> = [
   {
-    path: "",
-    priority: 1,
+    path: "/",
+    priority: 1.0,
     changeFrequency: "weekly",
   },
   {
@@ -90,9 +92,11 @@ const routes: Array<{
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const baseUrl = site.url.replace(/\/+$/, "");
+
   return routes.map(({ path, priority, changeFrequency }) => ({
-    url: new URL(path || "/", site.url).toString(),
-    lastModified: new Date(),
+    url: `${baseUrl}${path}`,
+    lastModified,
     changeFrequency,
     priority,
   }));

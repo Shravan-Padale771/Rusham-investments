@@ -31,8 +31,10 @@ export function pageMetadata({
     description,
     keywords: keywords.length ? keywords : undefined,
 
+    metadataBase: new URL(site.url),
+
     alternates: {
-      canonical: normalizedPath,
+      canonical: url,
     },
 
     robots: {
